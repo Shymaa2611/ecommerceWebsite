@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 class Product(models.Model):
     product_name=models.CharField(max_length=100,verbose_name="name")
     product_desc=models.TextField(verbose_name="description")
@@ -30,4 +30,9 @@ class Product_accessories(models.Model):
     alternative_accessory=models.ManyToManyField(Product,related_name="alternative_accessory",verbose_name="Alternative accessory")
     def __str__(self):
         return self.main_accessory
-
+class user_profile(models.Model):
+    first_name=models.CharField(max_length=100)
+    last_name=models.CharField(max_length=100)
+    email=models.CharField(max_length=100)
+    def __str__(self):
+        return self.email

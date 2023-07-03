@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from .models import Product,Product_accessories,Product_Alternative,Category
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import CreateView
+from django.views.generic import CreateView,UpdateView
 from .forms import userAccount
-from django.contrib.auth.models import User
+from .models import user_profile
 def index(request):
     context={
         "products":Product.objects.all(),
@@ -12,14 +12,20 @@ def index(request):
     return render(request,'pages/index.html',context)
 
 class profile(CreateView):
-    model=User
+    model=user_profile
     form_class=userAccount
     template_name='pages/profile.html'
     context_object_name='form'
     success_url='/'
     
 def edit_profile(request):
-    return render(request,'pages/edit_profile.html')
+    return render(request,)
+class edit_profile(UpdateView):
+    model=user_profile
+    form_class=userAccount
+    template_name='pages/edit_profile.html'
+    context_object_name="form"
+    success_url='/'
 
 def single_product(request,id):
     context={
