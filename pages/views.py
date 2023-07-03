@@ -12,6 +12,10 @@ def signUp(request):
     return render(request,'authentication/signUp.html')
 def login(request):
     return render(request,'authentication/login.html')
+def forget_passward(request):
+    return render(request,'authentication/forget_passward.html')
+def reset_passward(request):
+    return render(request,'authentication/reset_passward.html')
 def cart(request):
     return render(request,'pages/cart.html')
 def checkout(request):
