@@ -1,6 +1,8 @@
-<head>
-  <link href="css/profile_style.css" rel="stylesheet" />
-</head>
+{%load static%}
+{%block head%}
+<link href="{% static 'css/profile_style.css' %}" rel="stylesheet" />
+{%endblock head%}
+{%block content%}
 <div class="form">
   <div class="subtitle" ><h1>Edit Your Profile !</h1></div>
   <div class="input-container ic1">
@@ -20,3 +22,4 @@
   </div>
   <button type="text" class="submit">submit</button>
 </div>
+{%endblock content%}

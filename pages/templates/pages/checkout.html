@@ -1,8 +1,11 @@
-<head>
-  <link href="css/checkout.css" rel="stylesheet" />
-</head>
+{%extends 'base.html'%}
+{%load static%}
+{%block head%}
+<link href="{% static 'css/checkout.css' %}" rel="stylesheet" />
+{%endblock head%}
+{%block content%}
 <div class="mainscreen">
-  <!-- <img src="https://image.freepik.com/free-vector/purple-background-with-neon-frame_52683-34124.jpg"  class="bgimg " alt="">--> 
+ 
     <div class="card">
       <div class="leftside">
         <img
@@ -40,5 +43,6 @@
         </form>
       </div>
     </div>
-  </div>
+
+  {%endblock content%}
 
