@@ -1,7 +1,10 @@
-<head>
-    <link href="style2.css" rel="stylesheet" />
-  </head>
-  <body>
+{%extends 'base.html'%}
+{%load static%}
+{%block head%}
+    
+<link href="{% static 'css/style2.css' %}" rel="stylesheet" />
+{%endblock head%}
+{%block content%}
     <div class="wrapper">
       <div class="logo">
         <img src="https://th.bing.com/th/id/OIP.6Q9KaCgc4doE6LmLrJfLogHaER?pid=ImgDet&rs=1" alt="">
@@ -28,4 +31,5 @@
       
     </div>
   </body>
+{%endblock content%}
   

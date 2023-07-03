@@ -1,7 +1,10 @@
-<head>
-  <link href="style2.css" rel="stylesheet" />
-</head>
-<body>
+{%extends 'base.html'%}
+{%load static%}
+{%block head%}
+    
+<link href="{% static 'css/style2.css' %}" rel="stylesheet" />
+{%endblock head%}
+{%block content%}
  
   <div class="wrapper">
     <div class="logo">
@@ -25,4 +28,4 @@
         <a href="#">Forget password?</a> or <a href="#">Sign up</a>
     </div>
   </div>
-</body>
+{%endblock content%}
