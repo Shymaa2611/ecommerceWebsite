@@ -2,21 +2,31 @@ from django.shortcuts import render
 from .models import Product,Product_accessories,Product_Alternative,Category
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
+from .forms import userAccount
+from django.contrib.auth.models import User
 def index(request):
     context={
         "products":Product.objects.all(),
 
     }
     return render(request,'pages/index.html',context)
-def profile(request):
-    return render(request,'pages/profile.html')
+
+class profile(CreateView):
+    model=User
+    form_class=userAccount
+    template_name='pages/profile.html'
+    context_object_name='form'
+    success_url='/'
+    
 def edit_profile(request):
     return render(request,'pages/edit_profile.html')
+
 def single_product(request,id):
     context={
         "product":Product.objects.get(id=id)
     }
     return render(request,'pages/single_product.html',context)
+
 class signUp(CreateView):
     form_class=UserCreationForm
     context_object_name='form'
