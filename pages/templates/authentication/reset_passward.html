@@ -1,35 +1,26 @@
 {%extends 'base.html'%}
-{%load static%}
-{%block head%}
-    
-<link href="{% static 'css/style2.css' %}" rel="stylesheet" />
-{%endblock head%}
+
 {%block content%}
-    <div class="wrapper">
-      <div class="logo">
-        <img src="https://th.bing.com/th/id/OIP.6Q9KaCgc4doE6LmLrJfLogHaER?pid=ImgDet&rs=1" alt="">
-      </div>
-      <div class="text-center mt-4 name">
-        <br/><br/>
-       Reset Passward
-      </div>
-      <br/>
-      <form class="p-3 mt-3">
-       
-          <div class="form-field d-flex align-items-center">
-              <span class="far fa-user"></span>
-              <input type="text" name="userName" id="userName" placeholder="Old Passward">
-          </div>
-          <div class="form-field d-flex align-items-center">
-            <span class="far fa-user"></span>
-            <input type="text" name="userName" id="userName" placeholder="New Passward">
-        </div>
-        
-        
-          <button class="btn mt-3">Reset Passward</button>
-      </form>
-      
-    </div>
-  </body>
+
+<div class="center">
+	<form method="post" class="card">
+	  {% csrf_token %}
+	  <h2>Password Reset Confirm</h2>
+	  
+	  {% for field in form %}
+	    		{{ field.label_tag }} 
+	        	{{ field }}
+	        	{% if field.errors %}
+	        		<small>{{ field.errors|striptags  }}</small> 
+	        	{% endif %}
+		{% endfor %}
+	  
+	  
+	  <div>
+	    <button type="submit" class="btn btn-primary">Reset Password</button>
+	  </div>
+	</form>
+</div>
+
+
 {%endblock content%}
-  

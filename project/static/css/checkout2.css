@@ -22,7 +22,7 @@ body {
     background: white;
     position:center;
     align-self: center;
-    top: 50rem;
+    top: 0rem;
     border-radius: 1.5rem;
     box-shadow: 4px 3px 20px #3535358c;
     display:flex;
@@ -92,9 +92,7 @@ p{
 }
 
 .button{
-    background: linear-gradient(
-135deg
-, #753370 0%, #298096 100%);
+    background-color:blue ;
     padding: 15px;
     border: none;
     border-radius: 50px;

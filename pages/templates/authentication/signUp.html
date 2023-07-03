@@ -12,23 +12,24 @@
     <div class="text-center mt-4 name">
        SignUp
     </div>
-    <form class="p-3 mt-3">
+    <form class="p-3 mt-3" method="post">
+      {%csrf_token%}
         <div class="form-field d-flex align-items-center">
             <span class="far fa-user"></span>
-            <input type="text" name="userName" id="userName" placeholder="Username">
+            {{form.username}}
         </div>
         <div class="form-field d-flex align-items-center">
             <span class="fas fa-key"></span>
-            <input type="password" name="password" id="pwd" placeholder="Password">
+            {{form.password1}}
         </div>
         <div class="form-field d-flex align-items-center">
           <span class="fas fa-key"></span>
-          <input type="password" name="password" id="pwd" placeholder="Confirm">
+          {{form.password2}}
       </div>
-        <button class="btn mt-3">Login</button>
+        <button class="btn mt-3 " type="submit">SignUp</button>
     </form>
     <div class="text-center fs-6">
-        <a href="#">Forget password?</a> or <a href="#">Login</a>
+        <a href="{%url 'forget_passward' %}">Forget password?</a> or <a href="{%url 'login'%}">Login</a>
     </div>
   </div>
 {%endblock content%}
