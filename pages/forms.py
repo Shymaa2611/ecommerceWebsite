@@ -1,7 +1,6 @@
 from django import forms
-from .models import user_profile
-
+from .models import Profile
 class userAccount(forms.ModelForm):
     class Meta:
-        model=user_profile
+        model=Profile
         fields='__all__'

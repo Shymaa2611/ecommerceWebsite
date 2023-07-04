@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
+from django.db.models.signals import post_save
 class Product(models.Model):
     product_name=models.CharField(max_length=100,verbose_name="name")
     product_desc=models.TextField(verbose_name="description")
@@ -30,9 +32,23 @@ class Product_accessories(models.Model):
     alternative_accessory=models.ManyToManyField(Product,related_name="alternative_accessory",verbose_name="Alternative accessory")
     def __str__(self):
         return self.main_accessory
-class user_profile(models.Model):
-    first_name=models.CharField(max_length=100)
-    last_name=models.CharField(max_length=100)
-    email=models.CharField(max_length=100)
+class Profile(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE,blank=True,null=True)
+    first_name=models.CharField(max_length=100,blank=True,null=True)
+    last_name=models.CharField(max_length=100,blank=True,null=True)
+    email=models.CharField(max_length=100,blank=True,null=True)
+    image=models.ImageField(upload_to='user_photo/',blank=True,null=True)
+    address=models.CharField(max_length=100,blank=True,null=True)
+    country=models.CharField(max_length=100,blank=True,null=True)
+    create_at=models.DateTimeField(auto_now_add=True)
+    slug=models.SlugField(blank=True,null=True)
+    def save(self,*args,**kwarg):
+        if not self.slug:
+            self.slug=slugify(self.user.username)
+        super(Profile,self).save(*args,**kwarg)
     def __str__(self):
-        return self.email
+        return self.slug
+def create_profile(sender,**kwargs):
+    if kwargs['created']:
+        user_profile=Profile.objects.create(user=kwargs['instance'])
+post_save.connect(create_profile,sender=User)
