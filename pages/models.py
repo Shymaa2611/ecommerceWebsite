@@ -38,8 +38,12 @@ class Profile(models.Model):
     last_name=models.CharField(max_length=100,blank=True,null=True)
     email=models.CharField(max_length=100,blank=True,null=True)
     image=models.ImageField(upload_to='user_photo/',blank=True,null=True)
+    phone_number=models.CharField(max_length=100,blank=True,null=True)
+    state=models.CharField(max_length=100,blank=True,null=True)
     address=models.CharField(max_length=100,blank=True,null=True)
+    street=models.CharField(max_length=100,blank=True,null=True)
     country=models.CharField(max_length=100,blank=True,null=True)
+    city=models.CharField(max_length=100,blank=True,null=True)
     create_at=models.DateTimeField(auto_now_add=True)
     slug=models.SlugField(blank=True,null=True)
     def save(self,*args,**kwarg):
@@ -52,3 +56,14 @@ def create_profile(sender,**kwargs):
     if kwargs['created']:
         user_profile=Profile.objects.create(user=kwargs['instance'])
 post_save.connect(create_profile,sender=User)
+
+class order_DB(models.Model):
+    order=models.ForeignKey(User,on_delete=models.CASCADE)
+    total_orders=models.IntegerField(default=0)
+    order_name=models.CharField(max_length=100)
+    order_desc=models.TextField(null=True,blank=True)
+    order_quantity=models.IntegerField(default=0)
+    order_price=models.FloatField(default=0.0)
+    order_image=models.ImageField(upload_to='orders/',null=True,blank=True)
+    order_created=models.DateTimeField(auto_now_add=True)
+

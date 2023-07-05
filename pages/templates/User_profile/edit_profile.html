@@ -1,0 +1,58 @@
+{%extends 'base.html'%}
+{%load static%}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{%block head%}
+<link href="{% static 'css/profile.css' %}" rel="stylesheet" />
+{%endblock head%}
+{%block content%}
+<form method="post">
+  {%csrf_token%}
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+      {%if form.image.url %}
+      <div class="col-md-3 border-right">
+          
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{form.image.url}}"><span class="font-weight-bold">{{User.username}}</span><span class="text-black-50">{{form.email}}</span><span> </span></div>
+     </div>
+         {%else%}
+         <div class="col-md-3 border-right">
+          
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://www.servermx.com/export/system/modules/com.servermx.responsive/resources/assets/img/user.jpg"><span class="font-weight-bold">{{User.username}}</span><span class="text-black-50">{{User.email}}</span><span> </span></div>
+       </div>
+       
+         {%endif%}
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6">{% bootstrap_field form.first_name %}</div>
+                    <div class="col-md-6"> {% bootstrap_field form.last_name %}</div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"> {% bootstrap_field form.phone_number %}</div>
+                    <div class="col-md-12"> {% bootstrap_field form.address %}</div>
+                    <div class="col-md-12">{% bootstrap_field form.country %}</div>
+                    <div class="col-md-12"> {% bootstrap_field form.street %}</div>
+                    <div class="col-md-12"> {% bootstrap_field form.state %}</div>
+                    <div class="col-md-12"> {% bootstrap_field form.slug %}</div>
+                    <div class="col-md-12">{% bootstrap_field form.email %}</div>
+                    <div class="col-md-12"> {% bootstrap_field form.image %}</div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6" >{% bootstrap_field form.city  %}</div>
+                    <div class="col-md-6">{% bootstrap_field form.state %}</div>
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+            </div>
+        </div>
+      
+    </div>
+</div>
+</div>
+</div>
+</form>
+{%endblock content%}

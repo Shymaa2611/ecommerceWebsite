@@ -1,26 +1,27 @@
+from typing import Any, Dict
 from django.shortcuts import render
 from .models import Product,Product_accessories,Product_Alternative,Category
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import CreateView,UpdateView,ListView,DetailView,RedirectView
+from django.views.generic import CreateView,UpdateView,ListView,DetailView
 from .forms import userAccount
-from .models import Profile
+from .models import Profile,order_DB
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 class index(ListView):
     model=Product
     template_name='pages/index.html'
     context_object_name='products'
-class profile(CreateView):
+
+class profile(DetailView):
     model=Profile
-    form_class=userAccount
-    template_name='pages/profile.html'
-    context_object_name='form'
-    success_url='/'
+    template_name='User_profile/profile.html'
+    context_object_name='data'
     
 class edit_profile(UpdateView):
     model=Profile
     form_class=userAccount
-    template_name='pages/edit_profile.html'
+    template_name='User_profile/edit_profile.html'
     context_object_name="form"
     success_url='/'
 class single_product(DetailView):
@@ -57,5 +58,8 @@ class order(ListView):
     model=Product
     template_name='pages/order.html'
     context_object_name='orders'
+
+       
+      
 
 
