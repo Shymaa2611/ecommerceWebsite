@@ -4,12 +4,12 @@ from .models import Product,Product_accessories,Product_Alternative,Category
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView,UpdateView,ListView,DetailView
 from .forms import userAccount
-from .models import Profile,order_DB
+from .models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 class index(ListView):
-    model=Product
+    model=Product.objects.all()[:10]
     template_name='pages/index.html'
     context_object_name='products'
 
@@ -24,6 +24,7 @@ class edit_profile(UpdateView):
     template_name='User_profile/edit_profile.html'
     context_object_name="form"
     success_url='/'
+
 class single_product(DetailView):
     model=Product
     template_name='pages/single_product.html'
@@ -58,6 +59,7 @@ class order(ListView):
     model=Product
     template_name='pages/order.html'
     context_object_name='orders'
+
 
        
       
