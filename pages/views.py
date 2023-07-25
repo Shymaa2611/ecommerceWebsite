@@ -9,7 +9,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 class index(ListView):
-    model=Product.objects.all()[:10]
+    model=Product
+    queryset=Product.objects.all()[:10]
     template_name='pages/index.html'
     context_object_name='products'
 
