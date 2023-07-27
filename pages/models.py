@@ -3,6 +3,17 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.core.validators import MaxValueValidator,MinValueValidator
 from django.db.models.signals import post_save
+class Brand(models.Model):
+    name=models.CharField(max_length=20)
+    def __str__(self):
+        return self.name
+class Category(models.Model):
+    Category_name=models.CharField(max_length=100,verbose_name="name")
+    Category_desc=models.TextField(verbose_name='description')
+    Category_image=models.ImageField(upload_to='categories/')
+    def __str__(self):
+        return self.Category_name
+
 class Product(models.Model):
     product_name=models.CharField(max_length=100,verbose_name="name")
     product_desc=models.TextField(verbose_name="description")
@@ -12,8 +23,8 @@ class Product(models.Model):
     product_color=models.CharField(max_length=100,blank=True,null=True)
     product_material=models.CharField(max_length=100,blank=True,null=True)
     product_image=models.ImageField(upload_to='product/' ,verbose_name="image")
-    brand=models.ForeignKey('Brand',on_delete=models.Case,blank=True,null=True)
-    category=models.ForeignKey('Category',on_delete=models.Case,blank=True,null=True)
+    brand=models.ForeignKey(Brand,on_delete=models.Case,blank=True,null=True)
+    category=models.ForeignKey(Category,on_delete=models.Case,blank=True,null=True)
     create_at=models.DateField(auto_now_add=True)
     def no_of_rating(self):
         no_ratings=Rating.objects.filter(product=self).count()
@@ -34,13 +45,6 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
 
-class Category(models.Model):
-    Category_name=models.CharField(max_length=100,verbose_name="name")
-    Category_desc=models.TextField(verbose_name='description')
-    Category_image=models.ImageField(upload_to='categories/')
-    def __str__(self):
-        return self.Category_name
-
 class Product_Alternative(models.Model):
     main_Product=models.ForeignKey(Product,on_delete=models.CASCADE,related_name="main_product",verbose_name="Main Product")
     alternative_product=models.ManyToManyField(Product,related_name="alternative_product",verbose_name="Alternative Product")
@@ -53,10 +57,6 @@ class Product_accessories(models.Model):
     def __str__(self):
         return self.main_accessory.product_name
 
-class Brand(models.Model):
-    name=models.CharField(max_length=20)
-    def __str__(self):
-        return self.name
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,blank=True,null=True)
     first_name=models.CharField(max_length=100,blank=True,null=True)
